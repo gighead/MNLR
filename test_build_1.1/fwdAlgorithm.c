@@ -157,12 +157,12 @@ int packetForwardAlgorithm(char currentTier[], char desTier[]) {
 
 					if(checkUIDComp){
 
-						formNextUID(nextUID,curUID,true); //+1 case
+						//formNextUID(nextUID,curUID,true); //+1 case
 
 					}
 					else{
 						
-						formNextUID(nextUID,curUID,false); //-1 case
+						//formNextUID(nextUID,curUID,false); //-1 case
 
 					}
 
@@ -182,10 +182,66 @@ int packetForwardAlgorithm(char currentTier[], char desTier[]) {
 	return returnValue;
 }
 
+boolean compareUIDs(char* curUID,char* destUID) {
+
+	//compare the UID's of both current NOde and the destination node
+	int ic =0;
+	int id = 0;
+	char curPart[20];
+	char destPart[20];
+	int k;
+
+	while(curUID[ic]! = '/0' && destUID[id]! = '/0' ){
+
+		k  =0;
+		while(curUID[ic]! = '/0' && curUID[ic]! = '.'){
+			curPart[k++] = curUID[ic];
+			ic++;
+		}
+		curPart[k++] = '/0';
+
+		k  =0;
+		while(destUID[id]! = '/0' && destUID[id]! = '.'){
+			destPart[k++] = curUID[ic];
+			id++;
+		}
+		destPart[k++] = '/0';
+
+		int curPartVal = getValFromString(curPart);
+		int destPartVal = getValFromString(destPart);
+
+		if(curPartVal < destPartVal)
+			return True;
+		else if(curPartVal > destPartVal)
+			return False;
+		else{
+			//equal case 
+			//continue
+			ic++;
+			id++;
+			memset(curPart,'/0');
+
+			memset(destPart,'/0');
+		}
+			
+
+
+	}
+
+	if(destUID[id]! = '/0' )
+		return false;
+
+	return true; //Should never come to this case as destID is always > curID length
+	
+	//compare the parts (1 < 2)
+	//return True if MyUID is < Dest UID
+
+}
 
 void getUID(char* curUID,char* currentTier){
 
 	int i = 0;
+	////Truncate and store the truncated part as the Tier value the UID's of both the current and the destination 
 
 	while(currentTier[i] != '.'){
 		i++;

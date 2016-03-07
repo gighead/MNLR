@@ -1,4 +1,3 @@
-# MNLR
 MNLR
 
 Input Specifications:
@@ -95,3 +94,6 @@ How to run code:
 	At node 3:
 		./a.out    -T   1.3    -N    0    10.1.2.3    24   eth4
 	
+=======
+MNLR Research Project
+>>>>>>> c3e7bc0c9d2db035bc5dae396b386d5bee3ae961
